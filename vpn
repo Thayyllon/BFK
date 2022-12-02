@@ -1,0 +1,54 @@
+#!/bin/bash
+#Author: Thaylon Roberto Muniz da Silva
+#Linkedin: linkedin.com/in/thaylon
+#Date: 01/12/2022
+#hours: 23:33
+
+
+#------------------------------------------------- Realize tais ações a risca para o funcionamento correto do script --------------------------------------------------
+
+
+#			1. De permissão de execução com o comando `chmod +x vpn´
+#			2. Copie o arquivo para o local de variaveis de ambiente como /usr/sbin com o comando `m̀v vpn /usr/sbin/´
+#			3. Dependendo da versão do seu sistema operacional o caminho para as variaveis de ambiente pode ser outro, pesquise com base no seu sistema.
+#			3. Com esses passos vc deve ser capaz de chamar o arquivo 'vpn' em qualquer terminal e executa-lo
+
+
+help() {
+	echo "Para executar em qualquer terminal, leia o script com comando ´cat vpn´ e siga as instruções"
+	echo "Crie o diretorio /VPN em ~/Documentos"
+        echo "Depois adicione seus arquivos .opvn"
+        echo "Você pode renomea-los, quando quiser ativar a vpn utilize o comando 'vpn {nome_do_arquivo em /VPN'"
+	echo "-C = Criar diretorio /VPN"
+}
+
+
+		case $1 in 
+
+		"--help")
+			help
+			;;
+
+		"-h")
+			help
+			;;
+
+		"-C")
+			if [ -d ~/Documentos/VPN ];
+			then
+				echo "O diretorio ~/Documentos/VPN já existe"
+			else
+				mkdir ~/Documentos/VPN
+				echo "Diretorio ~/Documentos/VPN criado com sucesso"
+			fi
+			;;
+		*)
+
+			if [ -f ~/Documentos/VPN/$1 ];
+ 		       then
+		               sudo openvpn ~/Documentos/VPN/$1
+		       else
+               			echo "Arquivo de VPN não encontrado em ~/Documentos/VPN"
+			fi
+			;;
+	esac
